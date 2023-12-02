@@ -1,18 +1,25 @@
 from utils import Utils
 
+used_compliments = []
 compliments = Utils.convert_dict_keys_to_ints(
     Utils.load_json_as_dict(
         path="data/compliments.json"
     )
 )
-used_compliments = []
 
+used_memories = []
 memories = Utils.convert_dict_keys_to_ints(
     Utils.load_json_as_dict(
         path="data/memories.json"
     )
 )
-used_memories = []
+
+used_reasons = []
+reasons = Utils.convert_dict_keys_to_ints(
+    Utils.load_json_as_dict(
+        path="data/reasons.json"
+    )
+)
 
 # -------------------------------------------------------------------------------
 
@@ -47,6 +54,7 @@ def switch_case(case_key):
     cases = {
             1: get_compliment,
             2: get_memory,
+            3: get_reason,
         }
 
     case_function = cases.get(case_key, get_default)
@@ -86,6 +94,22 @@ def get_memory():
 
     text = memories.get(random_key)
     used_memories.append(random_key)
+
+    return text
+
+
+def get_reason():
+    random_key = Utils.get_random_integer_in_range(
+        min=0,
+        max=len(reasons),
+        exclusions=used_reasons
+    )
+
+    if random_key is None:
+        return "Looks like I'm out of reasons for now..."
+
+    text = reasons.get(random_key)
+    used_reasons.append(random_key)
 
     return text
 
