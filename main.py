@@ -13,7 +13,9 @@ def main():
 
         option = int(input("Type your choice and press enter: "))
 
-        print("She chose: " + str(option))
+        # cases = {
+        #     1:
+        # }
 
 
 main()
