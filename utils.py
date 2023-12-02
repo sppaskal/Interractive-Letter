@@ -21,9 +21,7 @@ class Utils():
             return None
 
         # Use random.sample to get a unique random choice
-        random_int = random.sample(population, 1)[0]
-
-        return random_int
+        return random.sample(population, 1)[0]
 
     # --------------------------------------------------------------------------
 

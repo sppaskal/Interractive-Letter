@@ -32,6 +32,10 @@ class Data():
             )
         )
 
+        self.info = Utils.load_json_as_dict(
+            path="data/info.json"
+        )
+
         self.data_types = {
             0: "DNE",
             1: "compliments",
@@ -43,7 +47,7 @@ class Data():
     # -----------------------------------------------------
 
     def get_default(self):
-        text = "I'm not familiar with that option. Try one of the options I listed!"
+        text = self.info.get("invalid_choice")
         return {
                 "text": text,
                 "found_new": True,
@@ -60,7 +64,7 @@ class Data():
         )
 
         if random_key is None:
-            text = "Looks like I'm out of compliments for now..."
+            text = self.info.get("compliments_empty")
             return {
                 "text": text,
                 "found_new": False,
@@ -86,7 +90,7 @@ class Data():
         )
 
         if random_key is None:
-            text = "Looks like I'm out of memories for now..."
+            text = self.info.get("memories_empty")
             return {
                 "text": text,
                 "found_new": False,
@@ -112,7 +116,7 @@ class Data():
         )
 
         if random_key is None:
-            text = "Looks like I'm out of reasons for now..."
+            text = self.info.get("reasons_empty")
             return {
                 "text": text,
                 "found_new": False,
@@ -138,7 +142,7 @@ class Data():
         )
 
         if random_key is None:
-            text = "Looks like I'm out of jokes for now..."
+            text = self.info.get("jokes_empty")
             return {
                 "text": text,
                 "found_new": False,
