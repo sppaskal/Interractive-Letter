@@ -9,7 +9,7 @@ class Utils():
         Outputs a random number between the min and max
         given range (min is inclusive, but max is not). 
         Will also exclude any results in the exclusions list.
-        The function returns -1 if there are no valid integers
+        The function returns None if there are no valid integers
         left in the range.
         '''
         # Create a population by removing exclusions from the range
@@ -17,7 +17,7 @@ class Utils():
 
         # Check if there are valid choices in the population
         if not population:
-            return -1
+            return None
 
         # Use random.sample to get a unique random choice
         random_int = random.sample(population, 1)[0]
