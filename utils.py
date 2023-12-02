@@ -1,4 +1,5 @@
 import random
+import json
 
 
 class Utils():
@@ -7,7 +8,7 @@ class Utils():
     def get_random_integer_in_range(min, max, exclusions=[]):
         '''
         Outputs a random number between the min and max
-        given range (min is inclusive, but max is not). 
+        given range (min is inclusive, but max is not).
         Will also exclude any results in the exclusions list.
         The function returns None if there are no valid integers
         left in the range.
@@ -23,3 +24,20 @@ class Utils():
         random_int = random.sample(population, 1)[0]
 
         return random_int
+
+    # --------------------------------------------------------------------------
+
+    @staticmethod
+    def load_json_as_dict(path):
+        with open(path, 'r') as file:
+            data_dict = json.load(file)
+        return data_dict
+
+    # --------------------------------------------------------------------------
+
+    @staticmethod
+    def convert_dict_keys_to_ints(data_dict):
+        data_dict = {int(key): value for key, value in data_dict.items()}
+        return data_dict
+
+    # --------------------------------------------------------------------------

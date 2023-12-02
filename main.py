@@ -1,18 +1,15 @@
 from utils import Utils
 
-compliments = {
-    0: "Compliment 0",
-    1: "Compliment 1",
-    2: "Compliment 2",
-    3: "Compliment 3"
-}
-
+compliments = Utils.convert_dict_keys_to_ints(
+    Utils.load_json_as_dict(
+        path="data/compliments.json"
+    )
+)
 used_compliments = []
 
 
 # Program interraction loop
 def main():
-
     print("        WELCOME DIANA")
     print("=============================")
 
@@ -30,6 +27,7 @@ def main():
         response = switch_case(option)
         print(response)
 
+        print("-----------------------------")
         print("")
         print("=============================")
 
@@ -51,7 +49,7 @@ def get_compliment():
         exclusions=used_compliments
     )
 
-    if random_key == -1:
+    if random_key is None:
         return "Looks like I'm out of compliments for now..."
 
     text = compliments.get(random_key)
