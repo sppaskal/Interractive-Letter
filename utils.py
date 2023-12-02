@@ -7,12 +7,13 @@ class Utils():
     def get_random_integer_in_range(min, max, exclusions=[]):
         '''
         Outputs a random number between the min and max
-        given range (inclusive). Will also exclude any
-        results in the exclusions list. The function returns
-        -1 if there are no valid integers left in the range.
+        given range (min is inclusive, but max is not). 
+        Will also exclude any results in the exclusions list.
+        The function returns -1 if there are no valid integers
+        left in the range.
         '''
         # Create a population by removing exclusions from the range
-        population = [x for x in range(min, max + 1) if x not in exclusions]
+        population = [x for x in range(min, max) if x not in exclusions]
 
         # Check if there are valid choices in the population
         if not population:
