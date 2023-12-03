@@ -1,4 +1,5 @@
 from data import Data
+import time
 
 
 # Program interraction loop
@@ -35,6 +36,12 @@ def main():
         print("")
         print("=============================")
 
+        transition(
+            seconds=3,
+            separator=".",
+            sep_count=3
+        )
+
 
 # -------------------------------------------------------------------------------
 
@@ -53,5 +60,17 @@ def switch_case(data, case_key):
 
 
 # -------------------------------------------------------------------------------
+
+
+def transition(seconds=1, separator=".", sep_count=3):
+    sec_per_sep = seconds/sep_count
+    for i in range(sep_count):
+        time.sleep(sec_per_sep)
+        print(separator)
+
+    print("")
+
+# -------------------------------------------------------------------------------
+
 
 main()
