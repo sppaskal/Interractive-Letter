@@ -1,13 +1,14 @@
+from utils import Utils
 from data import Data
 import time
 
 
 # Program interraction loop
 def main():
-    print("        WELCOME DIANA")
-    print("=============================")
 
     data = Data()
+
+    introduction(intro=data.intro)
 
     while True:
         print("(1) - Compliment")
@@ -16,7 +17,9 @@ def main():
         print("(4) - Dad joke")
         print("(0) - QUIT")
 
-        choice = int(input("Type your choice and press enter: "))
+        choice = check_choice_empty(
+            input("Type your choice and press enter: ")
+        )
 
         if choice == 0:
             break
@@ -73,8 +76,48 @@ def transition(seconds=1, separator=".", sep_count=3):
 # -------------------------------------------------------------------------------
 
 
-def introduction():
-    pass
+def introduction(intro):
+    '''
+    intro is expected to be a dictionary with a title
+    and a list of paragraphs for the body
+    '''
+
+    print(intro.get("title"))
+    print("")
+    time.sleep(2)
+    print("Press 'space' if you want to skip intro")
+    print("")
+    time.sleep(2)
+
+    body = intro.get("body")
+    for paragraph in body:
+        # Check for user input to skip the introduction
+        input_key = Utils.wait_for_key(0.1)
+        skip_keys = ['', ' ', 'space']
+        if input_key and input_key.lower() in skip_keys:
+            break
+
+        print(paragraph)
+        print("")
+        time.sleep(3)
+
+    print("=============================")
+
+# -------------------------------------------------------------------------------
+
+
+def check_choice_empty(choice):
+    '''
+    Checks if user input is not empty after strip
+    and if it's not returns it as int. If user input
+    is empty return -1
+    '''
+    if choice.strip():
+        return int(choice)
+    else:
+        return -1
+
+# -------------------------------------------------------------------------------
 
 
 main()

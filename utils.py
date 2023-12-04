@@ -1,5 +1,7 @@
 import random
 import json
+import msvcrt
+import time
 
 
 class Utils():
@@ -37,5 +39,20 @@ class Utils():
     def convert_dict_keys_to_ints(data_dict):
         data_dict = {int(key): value for key, value in data_dict.items()}
         return data_dict
+
+    # --------------------------------------------------------------------------
+
+    def wait_for_key(timeout):
+        start_time = time.time()
+        input_key = None
+        while True:
+            if msvcrt.kbhit():
+                input_key = msvcrt.getch().decode('utf-8')
+                while msvcrt.kbhit():
+                    msvcrt.getch()  # Clear the input buffer
+                break
+            elif time.time() - start_time > timeout:
+                break
+        return input_key
 
     # --------------------------------------------------------------------------

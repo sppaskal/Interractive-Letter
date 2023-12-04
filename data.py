@@ -32,6 +32,10 @@ class Data():
             )
         )
 
+        self.intro = Utils.load_json_as_dict(
+            path="data/intro.json"
+        )
+
         self.info = Utils.load_json_as_dict(
             path="data/info.json"
         )
