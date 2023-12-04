@@ -5,6 +5,7 @@
 *.pot
 *.env
 *.venv
+*.json
 temp/
 *.vscode
 __pycache__/

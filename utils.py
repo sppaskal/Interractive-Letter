@@ -43,6 +43,10 @@ class Utils():
     # --------------------------------------------------------------------------
 
     def wait_for_key(timeout):
+        '''
+        Waits for key inputs for a certain timeout
+        and also resets input buffer when finished.
+        '''
         start_time = time.time()
         input_key = None
         while True:
@@ -54,5 +58,17 @@ class Utils():
             elif time.time() - start_time > timeout:
                 break
         return input_key
+
+    # --------------------------------------------------------------------------
+
+    def seconds_to_read_words(words):
+        '''
+        Expects a string of words and determines
+        time it would take average adult to read
+        said words in seconds.
+        '''
+        avrg = 4    # words per second
+        word_count = len(str(words).split())
+        return word_count / avrg
 
     # --------------------------------------------------------------------------

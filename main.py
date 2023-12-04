@@ -79,7 +79,7 @@ def transition(seconds=1, separator=".", sep_count=3):
 def introduction(intro):
     '''
     intro is expected to be a dictionary with a title
-    and a list of paragraphs for the body
+    and a list of paragraphs for the body.
     '''
 
     print(intro.get("title"))
@@ -99,7 +99,8 @@ def introduction(intro):
 
         print(paragraph)
         print("")
-        time.sleep(3)
+        seconds = Utils.seconds_to_read_words(paragraph)
+        time.sleep(seconds)
 
     print("=============================")
 
@@ -110,7 +111,7 @@ def check_choice_empty(choice):
     '''
     Checks if user input is not empty after strip
     and if it's not returns it as int. If user input
-    is empty return -1
+    is empty return -1.
     '''
     if choice.strip():
         return int(choice)
