@@ -42,7 +42,6 @@ def main():
             sep_count=3
         )
 
-
 # -------------------------------------------------------------------------------
 
 
@@ -63,14 +62,19 @@ def switch_case(data, case_key):
 
 
 def transition(seconds=1, separator=".", sep_count=3):
-    sec_per_sep = seconds/sep_count
+    sec_per_sep = seconds/(sep_count + 1)
     for i in range(sep_count):
         time.sleep(sec_per_sep)
         print(separator)
 
+    time.sleep(sec_per_sep)
     print("")
 
 # -------------------------------------------------------------------------------
+
+
+def introduction():
+    pass
 
 
 main()
