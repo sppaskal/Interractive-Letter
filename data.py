@@ -137,7 +137,10 @@ class Data():
         self.used_reasons.append(random_key)
 
         return {
-            "text": text,
+            "text": Utils.insert_newline(
+                input_string=text,
+                max_chars=67
+            ),
             "found_new": True,
             "type": self.data_types.get(3)
         }

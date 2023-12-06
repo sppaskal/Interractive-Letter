@@ -9,6 +9,9 @@ def main():
 
     data = Data()
 
+    # TODO: Add a print of the selected choice before outputting text
+    # TODO: Make data folder selectable based on keyword that the user is prompted for when program starts.
+
     introduction(intro=data.intro)
 
     while True:
