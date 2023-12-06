@@ -72,3 +72,26 @@ class Utils():
         return word_count / avrg
 
     # --------------------------------------------------------------------------
+
+    def insert_newline(input_string, max_chars):
+        '''
+        Assumes that input_string is a sentence
+        separated by spaces. Will insert a new
+        line every max_chars without cutting off
+        any words.
+        '''
+        words = input_string.split()
+        current_line_length = 0
+        result = []
+
+        for word in words:
+            if current_line_length + len(word) <= max_chars:
+                result.append(word)
+                current_line_length += len(word) + 1  # +1 for the space
+            else:
+                result.append('\n' + word)
+                current_line_length = len(word) + 1  # Reset line length for the new line
+
+        return ' '.join(result)
+
+    # --------------------------------------------------------------------------

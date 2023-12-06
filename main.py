@@ -1,6 +1,7 @@
 from utils import Utils
 from data import Data
 import time
+import math
 
 
 # Program interraction loop
@@ -39,11 +40,12 @@ def main():
         print("")
         print("=============================")
 
-        transition(
-            seconds=3,
-            separator=".",
-            sep_count=3
-        )
+        # NOTE: Uncomment for transition between interractions
+        # transition(
+        #     seconds=3,
+        #     separator=".",
+        #     sep_count=3
+        # )
 
 # -------------------------------------------------------------------------------
 
@@ -85,22 +87,29 @@ def introduction(intro):
     print(intro.get("title"))
     print("")
     time.sleep(2)
-    print("Press 'space' if you want to skip intro")
+    print("Press 'space' if you want to skip forward")
     print("")
     time.sleep(2)
 
-    body = intro.get("body")
-    for paragraph in body:
-        # Check for user input to skip the introduction
-        input_key = Utils.wait_for_key(0.1)
-        skip_keys = ['', ' ', 'space']
-        if input_key and input_key.lower() in skip_keys:
-            break
+    # Check for user input to skip the introduction
+    input_key = Utils.wait_for_key(0.1)
+    skip_keys = ['', ' ', 'space']
+    if input_key not in skip_keys:
+        body = intro.get("body")
+        for paragraph in body:
+            print(paragraph)
+            print("")
 
-        print(paragraph)
-        print("")
-        seconds = Utils.seconds_to_read_words(paragraph)
-        time.sleep(seconds)
+            # segment sleep so that user can cancel it without
+            # having to wait the full duration
+            seconds = Utils.seconds_to_read_words(paragraph)
+            for i in range(math.ceil(seconds)):
+                # Check for user input to skip the introduction
+                input_key = Utils.wait_for_key(0.1)
+                skip_keys = ['', ' ', 'space']
+                if input_key and input_key.lower() in skip_keys:
+                    break
+                time.sleep(1)
 
     print("=============================")
 
