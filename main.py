@@ -9,16 +9,15 @@ def main():
 
     data = Data()
 
-    # TODO: Add a print of the selected choice before outputting text
     # TODO: Make data folder selectable based on keyword that the user is prompted for when program starts.
 
     introduction(intro=data.intro)
 
     while True:
-        print("(1) - Compliment")
-        print("(2) - Treasured memory")
-        print("(3) - A reason I love you")
-        print("(4) - Dad joke")
+        print("(1) - " + str(data.info.get("compliment_prompt")))
+        print("(2) - " + str(data.info.get("memory_prompt")))
+        print("(3) - " + str(data.info.get("reason_prompt")))
+        print("(4) - " + str(data.info.get("joke_prompt")))
         print("(0) - QUIT")
 
         choice = check_choice_empty(
@@ -33,6 +32,8 @@ def main():
         found_new = response.get("found_new")
         type = response.get("type")
 
+        print("")
+        print("You selected: " + str(type))
         print("")
         print(text_resp)
         if not found_new:
