@@ -7,7 +7,7 @@ import math
 # Program interraction loop
 def main():
 
-    name = input("Your first name: ")
+    name = input("Type your first name and press enter: ")
     data = Data(name=name)
 
     print("")
