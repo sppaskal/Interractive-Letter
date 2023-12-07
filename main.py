@@ -129,6 +129,12 @@ def introduction(intro):
                     break
                 time.sleep(1)
 
+    # print patterns
+    patterns_dict = intro.get("patterns")
+    for key, value in patterns_dict.items():
+        for line in value:
+            print(line)
+
     print("==========================================")
 
 # -------------------------------------------------------------------------------
