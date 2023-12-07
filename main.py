@@ -7,6 +7,7 @@ import math
 # Program interraction loop
 def main():
 
+    print("")
     name = input("Type your first name and press enter: ")
     data = Data(name=name)
 
@@ -20,6 +21,7 @@ def main():
         print("(4) - " + str(data.info.get("joke_prompt")))
         print("(5) - " + str(data.info.get("like_prompt")))
         print("(0) - QUIT")
+        print("")
 
         choice = validate_choice(
             input("Type your choice (0-5) and press enter: ")
@@ -75,7 +77,6 @@ def switch_case(data, case_key):
     auto_reset = auto_reset_options.get(case_key, False)
 
     return case_function(auto_reset)
-
 
 # -------------------------------------------------------------------------------
 
