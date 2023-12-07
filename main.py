@@ -21,7 +21,7 @@ def main():
         print("(5) - " + str(data.info.get("like_prompt")))
         print("(0) - QUIT")
 
-        choice = check_choice_empty(
+        choice = validate_choice(
             input("Type your choice (0-5) and press enter: ")
         )
 
@@ -130,16 +130,18 @@ def introduction(intro):
 # -------------------------------------------------------------------------------
 
 
-def check_choice_empty(choice):
+def validate_choice(choice):
     '''
-    Checks if user input is not empty after strip
-    and if it's not returns it as int. If user input
-    is empty return -1.
+    Checks if user input is not empty and that
+    it's a valid int and if it is it returns it
+    as int. If user input is empty or not a valid
+    int return -1.
     '''
-    if choice.strip():
-        return int(choice)
-    else:
-        return -1
+    choice = choice.strip()
+    if choice:  # is choice not empty
+        if choice.isdigit():  # is choice an int
+            return int(choice)
+    return -1
 
 # -------------------------------------------------------------------------------
 
