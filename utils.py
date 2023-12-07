@@ -67,7 +67,7 @@ class Utils():
         time it would take average adult to read
         said words in seconds.
         '''
-        avrg = 4    # words per second
+        avrg = 5    # words per second
         word_count = len(str(words).split())
         return word_count / avrg
 

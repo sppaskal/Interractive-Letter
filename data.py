@@ -49,6 +49,7 @@ class Data():
         self.intro = Utils.load_json_as_dict(
             path=self.db_path + "/intro.json"
         )
+        self.set_introduction()
 
         self.info = Utils.load_json_as_dict(
             path=self.db_path + "/info.json"
@@ -70,6 +71,19 @@ class Data():
             return "data/" + str(name)
         else:
             return "data/default"
+
+    # -----------------------------------------------------
+
+    def set_introduction(self):
+        updated_body = []
+        for paragraph in self.intro.get("body"):
+            updated_paragraph = Utils.insert_newline(
+                input_string=paragraph,
+                max_chars=67
+            )
+            updated_body.append(updated_paragraph)
+
+        self.intro["body"] = updated_body
 
     # -----------------------------------------------------
 

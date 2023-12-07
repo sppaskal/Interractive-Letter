@@ -42,7 +42,7 @@ def main():
                 data.reset_data(type)
 
         print("")
-        print("=============================")
+        print("==========================================")
 
         # NOTE: Uncomment for transition between interractions
         # transition(
@@ -125,7 +125,7 @@ def introduction(intro):
                     break
                 time.sleep(1)
 
-    print("=============================")
+    print("==========================================")
 
 # -------------------------------------------------------------------------------
 
