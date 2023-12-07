@@ -3,7 +3,9 @@ from utils import Utils
 
 class Data():
 
-    def __init__(self, name):
+    def __init__(self, name, max_line_len):
+
+        self.max_line_len = max_line_len
 
         self.databases = Utils.load_json_as_dict(
             path="data/databases.json"
@@ -54,6 +56,7 @@ class Data():
         self.info = Utils.load_json_as_dict(
             path=self.db_path + "/info.json"
         )
+        self.set_info()
 
         self.data_types = {
             0: "DNE",
@@ -79,11 +82,30 @@ class Data():
         for paragraph in self.intro.get("body"):
             updated_paragraph = Utils.insert_newline(
                 input_string=paragraph,
-                max_chars=67
+                max_chars=self.max_line_len
             )
             updated_body.append(updated_paragraph)
 
         self.intro["body"] = updated_body
+
+    # -----------------------------------------------------
+
+    def set_info(self):
+
+        # variables that need new lines inserted
+        vars = [
+            "compliments_empty",
+            "memories_empty",
+            "reasons_empty",
+            "jokes_empty",
+            "likes_empty"
+        ]
+
+        for var in vars:
+            self.info[var] = Utils.insert_newline(
+                input_string=self.info.get(var),
+                max_chars=self.max_line_len
+            )
 
     # -----------------------------------------------------
 
@@ -125,7 +147,7 @@ class Data():
         return {
             "text": Utils.insert_newline(
                 input_string=text,
-                max_chars=67
+                max_chars=self.max_line_len
             ),
             "found_new": True,
             "type": data_type
@@ -161,7 +183,7 @@ class Data():
         return {
             "text": Utils.insert_newline(
                 input_string=text,
-                max_chars=67
+                max_chars=self.max_line_len
             ),
             "found_new": True,
             "type": data_type
@@ -197,7 +219,7 @@ class Data():
         return {
             "text": Utils.insert_newline(
                 input_string=text,
-                max_chars=67
+                max_chars=self.max_line_len
             ),
             "found_new": True,
             "type": data_type

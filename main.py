@@ -9,7 +9,10 @@ def main():
 
     print("")
     name = input("Type your first name and press enter: ")
-    data = Data(name=name)
+    data = Data(
+        name=name,
+        max_line_len=67
+    )
 
     print("")
     introduction(intro=data.intro)
