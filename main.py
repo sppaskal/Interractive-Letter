@@ -7,10 +7,10 @@ import math
 # Program interraction loop
 def main():
 
-    data = Data()
+    name = input("Your first name: ")
+    data = Data(name=name)
 
-    # TODO: Make data folder selectable based on keyword that the user is prompted for when program starts.
-
+    print("")
     introduction(intro=data.intro)
 
     while True:
@@ -32,8 +32,7 @@ def main():
         found_new = response.get("found_new")
         type = response.get("type")
 
-        print("")
-        print("You selected: " + str(type))
+        print("Selected: " + str(type))
         print("")
         print(text_resp)
         if not found_new:

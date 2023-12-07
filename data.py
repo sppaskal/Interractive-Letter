@@ -3,41 +3,48 @@ from utils import Utils
 
 class Data():
 
-    def __init__(self):
+    def __init__(self, name):
+
+        self.databases = Utils.load_json_as_dict(
+            path="data/databases.json"
+        )
+
+        self.db_path = self.set_db_path(name)
+
         self.used_compliments = []
         self.compliments = Utils.convert_dict_keys_to_ints(
             Utils.load_json_as_dict(
-                path="data/compliments.json"
+                path=self.db_path + "/compliments.json"
             )
         )
 
         self.used_memories = []
         self.memories = Utils.convert_dict_keys_to_ints(
             Utils.load_json_as_dict(
-                path="data/memories.json"
+                path=self.db_path + "/memories.json"
             )
         )
 
         self.used_reasons = []
         self.reasons = Utils.convert_dict_keys_to_ints(
             Utils.load_json_as_dict(
-                path="data/reasons.json"
+                path=self.db_path + "/reasons.json"
             )
         )
 
         self.used_jokes = []
         self.jokes = Utils.convert_dict_keys_to_ints(
             Utils.load_json_as_dict(
-                path="data/jokes.json"
+                path=self.db_path + "/jokes.json"
             )
         )
 
         self.intro = Utils.load_json_as_dict(
-            path="data/intro.json"
+            path=self.db_path + "/intro.json"
         )
 
         self.info = Utils.load_json_as_dict(
-            path="data/info.json"
+            path=self.db_path + "/info.json"
         )
 
         self.data_types = {
@@ -47,6 +54,14 @@ class Data():
             3: "reasons",
             4: "jokes"
         }
+
+    # -----------------------------------------------------
+
+    def set_db_path(self, name):
+        if name.lower() in self.databases:
+            return "data/" + str(name)
+        else:
+            return "data/default"
 
     # -----------------------------------------------------
 
