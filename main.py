@@ -18,10 +18,11 @@ def main():
         print("(2) - " + str(data.info.get("memory_prompt")))
         print("(3) - " + str(data.info.get("reason_prompt")))
         print("(4) - " + str(data.info.get("joke_prompt")))
+        print("(5) - " + str(data.info.get("like_prompt")))
         print("(0) - QUIT")
 
         choice = check_choice_empty(
-            input("Type your choice (0-4) and press enter: ")
+            input("Type your choice (0-5) and press enter: ")
         )
 
         if choice == 0:
@@ -55,15 +56,25 @@ def main():
 
 def switch_case(data, case_key):
     cases = {
-            1: data.get_compliment,
-            2: data.get_memory,
-            3: data.get_reason,
-            4: data.get_joke,
-        }
+        1: data.get_compliment,
+        2: data.get_memory,
+        3: data.get_reason,
+        4: data.get_joke,
+        5: data.get_like
+    }
+
+    auto_reset_options = {
+        1: False,
+        2: False,
+        3: False,
+        4: False,
+        5: True
+    }
 
     case_function = cases.get(case_key, data.get_default)
+    auto_reset = auto_reset_options.get(case_key, False)
 
-    return case_function()
+    return case_function(auto_reset)
 
 
 # -------------------------------------------------------------------------------

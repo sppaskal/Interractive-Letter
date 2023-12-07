@@ -39,6 +39,13 @@ class Data():
             )
         )
 
+        self.used_likes = []
+        self.likes = Utils.convert_dict_keys_to_ints(
+            Utils.load_json_as_dict(
+                path=self.db_path + "/likes.json"
+            )
+        )
+
         self.intro = Utils.load_json_as_dict(
             path=self.db_path + "/intro.json"
         )
@@ -52,7 +59,8 @@ class Data():
             1: "compliments",
             2: "memories",
             3: "reasons",
-            4: "jokes"
+            4: "jokes",
+            5: "likes"
         }
 
     # -----------------------------------------------------
@@ -65,7 +73,7 @@ class Data():
 
     # -----------------------------------------------------
 
-    def get_default(self):
+    def get_default(self, auto_reset=False):
         text = self.info.get("invalid_choice")
         return {
                 "text": text,
@@ -75,7 +83,14 @@ class Data():
 
     # -----------------------------------------------------
 
-    def get_compliment(self):
+    def get_compliment(self, auto_reset=False):
+
+        data_type = self.data_types.get(1)
+
+        if auto_reset:
+            if len(self.compliments) == len(self.used_compliments):
+                self.reset_data(data_type)
+
         random_key = Utils.get_random_integer_in_range(
             min=0,
             max=len(self.compliments),
@@ -87,7 +102,7 @@ class Data():
             return {
                 "text": text,
                 "found_new": False,
-                "type": self.data_types.get(1)
+                "type": data_type
             }
 
         text = self.compliments.get(random_key)
@@ -99,12 +114,19 @@ class Data():
                 max_chars=67
             ),
             "found_new": True,
-            "type": self.data_types.get(1)
+            "type": data_type
         }
 
     # -----------------------------------------------------
 
-    def get_memory(self):
+    def get_memory(self, auto_reset=False):
+
+        data_type = self.data_types.get(2)
+
+        if auto_reset:
+            if len(self.memories) == len(self.used_memories):
+                self.reset_data(data_type)
+
         random_key = Utils.get_random_integer_in_range(
             min=0,
             max=len(self.memories),
@@ -116,7 +138,7 @@ class Data():
             return {
                 "text": text,
                 "found_new": False,
-                "type": self.data_types.get(2)
+                "type": data_type
             }
 
         text = self.memories.get(random_key)
@@ -128,12 +150,19 @@ class Data():
                 max_chars=67
             ),
             "found_new": True,
-            "type": self.data_types.get(2)
+            "type": data_type
         }
 
     # -----------------------------------------------------
 
-    def get_reason(self):
+    def get_reason(self, auto_reset=False):
+
+        data_type = self.data_types.get(3)
+
+        if auto_reset:
+            if len(self.reasons) == len(self.used_reasons):
+                self.reset_data(data_type)
+
         random_key = Utils.get_random_integer_in_range(
             min=0,
             max=len(self.reasons),
@@ -145,7 +174,7 @@ class Data():
             return {
                 "text": text,
                 "found_new": False,
-                "type": self.data_types.get(3)
+                "type": data_type
             }
 
         text = self.reasons.get(random_key)
@@ -157,12 +186,19 @@ class Data():
                 max_chars=67
             ),
             "found_new": True,
-            "type": self.data_types.get(3)
+            "type": data_type
         }
 
     # -----------------------------------------------------
 
-    def get_joke(self):
+    def get_joke(self, auto_reset=False):
+
+        data_type = self.data_types.get(4)
+
+        if auto_reset:
+            if len(self.jokes) == len(self.used_jokes):
+                self.reset_data(data_type)
+
         random_key = Utils.get_random_integer_in_range(
             min=0,
             max=len(self.jokes),
@@ -174,7 +210,7 @@ class Data():
             return {
                 "text": text,
                 "found_new": False,
-                "type": self.data_types.get(4)
+                "type": data_type
             }
 
         text = self.jokes.get(random_key)
@@ -183,7 +219,39 @@ class Data():
         return {
             "text": text,
             "found_new": True,
-            "type": self.data_types.get(4)
+            "type": data_type
+        }
+
+    # -----------------------------------------------------
+
+    def get_like(self, auto_reset=False):
+        data_type = self.data_types.get(5)
+
+        if auto_reset:
+            if len(self.likes) == len(self.used_likes):
+                self.reset_data(data_type)
+
+        random_key = Utils.get_random_integer_in_range(
+            min=0,
+            max=len(self.likes),
+            exclusions=self.used_likes
+        )
+
+        if random_key is None:
+            text = self.info.get("likes_empty")
+            return {
+                "text": text,
+                "found_new": False,
+                "type": data_type
+            }
+
+        text = self.likes.get(random_key)
+        self.used_likes.append(random_key)
+
+        return {
+            "text": text,
+            "found_new": True,
+            "type": data_type
         }
 
     # -------------------------------------------------------------------------------
@@ -197,3 +265,5 @@ class Data():
             self.used_reasons = []
         elif type == self.data_types.get(4):
             self.used_jokes = []
+        elif type == self.data_types.get(5):
+            self.used_likes = []

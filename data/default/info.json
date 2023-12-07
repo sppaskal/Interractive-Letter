@@ -3,9 +3,11 @@
     "memories_empty": "Looks like I'm out of memories for now...",
     "reasons_empty": "Looks like I'm out of reasons for now...",
     "jokes_empty": "Looks like I'm out of jokes for now...",
+    "likes_empty": "Looks like I'm out of likes for now...",
     "invalid_choice": "I'm not familiar with that option. Try one of the options I listed!",
     "compliment_prompt": "Compliment",
     "memory_prompt": "Memory",
     "reason_prompt": "Reason",
-    "joke_prompt": "Joke"
+    "joke_prompt": "Joke",
+    "like_prompt": "Like"
 }
