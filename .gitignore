@@ -5,9 +5,12 @@
 *.pot
 *.env
 *.venv
+*.spec
 keys.json
 temp/
 diana/
+build/
+dist/
 *.vscode
 __pycache__/
 local_settings.py
