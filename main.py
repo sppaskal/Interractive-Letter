@@ -21,7 +21,7 @@ def main():
         print("(0) - QUIT")
 
         choice = check_choice_empty(
-            input("Type your choice and press enter: ")
+            input("Type your choice (0-4) and press enter: ")
         )
 
         if choice == 0:
