@@ -2,6 +2,7 @@ import random
 import json
 import msvcrt
 import time
+import math
 
 
 class Utils():
@@ -67,7 +68,7 @@ class Utils():
         time it would take average adult to read
         said words in seconds.
         '''
-        avrg = 5    # words per second
+        avrg = 0.5    # words per second
         word_count = len(str(words).split())
         return word_count / avrg
 
@@ -93,5 +94,20 @@ class Utils():
                 current_line_length = len(word) + 1  # Reset line length for the new line
 
         return ' '.join(result)
+
+    # --------------------------------------------------------------------------
+
+    def segnmented_sleep(seconds, skip_keys=[]):
+        '''
+        Performs sleep in segments of 1 second.
+        Will interrupt sleep if skip keys are
+        pressed.
+        '''
+        for i in range(math.ceil(seconds)):
+            # Check for user input to skip the introduction
+            input_key = Utils.wait_for_key(0.1)
+            if input_key and input_key.lower() in skip_keys:
+                break
+            time.sleep(1)
 
     # --------------------------------------------------------------------------

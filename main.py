@@ -1,7 +1,6 @@
 from utils import Utils
 from data import Data
 import time
-import math
 
 
 # Program interraction loop
@@ -102,12 +101,25 @@ def introduction(intro):
     and a list of paragraphs for the body.
     '''
 
+    # NOTE: Had to put excessively long sleep time
+    # for first 2 prints as executable doesn't count
+    # time the same as running the program in terminal.
+
+    skip_keys = ['', ' ', 'space']
+
     print(intro.get("title"))
     print("")
-    time.sleep(2)
+    Utils.segnmented_sleep(
+        seconds=20,
+        skip_keys=skip_keys
+    )
+
     print("Press 'space' if you want to skip forward")
     print("")
-    time.sleep(2)
+    Utils.segnmented_sleep(
+        seconds=20,
+        skip_keys=skip_keys
+    )
 
     # Check for user input to skip the introduction
     input_key = Utils.wait_for_key(0.1)
@@ -118,16 +130,10 @@ def introduction(intro):
             print(paragraph)
             print("")
 
-            # segment sleep so that user can cancel it without
-            # having to wait the full duration
-            seconds = Utils.seconds_to_read_words(paragraph)
-            for i in range(math.ceil(seconds)):
-                # Check for user input to skip the introduction
-                input_key = Utils.wait_for_key(0.1)
-                skip_keys = ['', ' ', 'space']
-                if input_key and input_key.lower() in skip_keys:
-                    break
-                time.sleep(1)
+            Utils.segnmented_sleep(
+                seconds=Utils.seconds_to_read_words(paragraph),
+                skip_keys=skip_keys
+            )
 
     # print patterns
     patterns_dict = intro.get("patterns")
